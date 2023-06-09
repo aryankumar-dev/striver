@@ -1,0 +1,80 @@
+question 1 
+
+#include <iostream>
+
+using namespace std;
+
+void changerow(int **arr, int n, int m, int a) {
+    
+    cout<<"entry for"<<a<<endl;
+   for(int i = 0 ; i < n ;i++){
+     for(int j = 0 ; j<m;j++){
+         if(i == a){
+            arr[a][j] = -1; 
+         }
+     }
+ }
+}
+
+void changecol(int **arr, int n, int m, int a) {
+      cout<<"entry for"<<a<<endl;
+    for(int i = 0 ; i < n ;i++){
+     for(int j = 0 ; j<m;j++){
+         if(j == a){
+            arr[i][a] = -1; 
+         }
+     }
+ }
+}
+
+void changematrix(int **arr, int n, int m) {
+    
+   
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (arr[i][j] == 0) {
+                changerow(arr, n, m, i);
+                changecol(arr, n, m, j);
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (arr[i][j] == -1) {
+                arr[i][j] = 0;
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 3; // col
+    int m = 3; // row
+
+    // Create dynamic 2D array using new
+    int **arr = new int *[n];
+    for (int i = 0; i < n; i++) {
+        arr[i] = new int[m];
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    changematrix(arr, n, m);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Free memory by deleting the dynamic arrays
+    
+
+    return 0;
+}
